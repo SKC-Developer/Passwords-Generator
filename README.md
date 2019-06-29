@@ -19,7 +19,7 @@ You can download the Linux version (named *'passgen'*) or the Windows version (n
 Before compiling the code, make sure it's compitable with your system and compiler.
 
 ## Compiling:
-You can compile this code on every x64 system (x86 dosen't support in128 so you will have to change it).  
+You can compile this code on every x64 system (x86 dosen't support int128 so you will have to change it to another int).  
 To compile it on Windows, you can download the source and open *PassGen.dev* with *Dev-C++* and then select *'compile'*.  
 To compile it on Linux, type in the terminal:
 ~~~
