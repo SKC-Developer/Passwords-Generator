@@ -1,1 +1,0 @@
-Add threads-the threads write the passwords to the file in a pasudo-random way.
