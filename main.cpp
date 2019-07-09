@@ -1,6 +1,11 @@
+#ifdef __linux__
+#define _FILE_OFFSET_BITS 64
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
 typedef unsigned __int128 u128;
 
@@ -24,19 +29,31 @@ void PassGen(u128 num, unsigned char base, unsigned char len,const char*letters,
 
 void create_numbers(int len, char*letters, FILE*file,double file_size, bool progress)
 {
-	size_t last_size=0,base=strlen(letters);
+	uint64_t last_size=0,curr=0;
+	size_t base=strlen(letters);
 	u128 max = p(base, len);
 	int precent = -1;
 	for (u128 x = 0; x < max; x++)
 	{
 		PassGen(x,base,len,letters,file);
-		if (progress && ( precent != (int)((double)x * 100 / max) || (_ftelli64(file)-last_size)/(1024*1024) ))
+		#ifdef _WIN32
+		curr=_ftelli64(file);
+		#elif __linux__
+        curr=ftello(file);
+		#else
+		#error "Your OS is not compitable with this code. To make it compitable you must change some of it."
+		#endif
+		if (progress && ( precent != (int)((double)x * 100 / max) || (curr-last_size)/(1024*1024) ))
 		{
 			precent = (int)((double)x * 100 / max);
+			#ifdef _WIN32
 			last_size=_ftelli64(file);
-			_fseeki64(file,0,SEEK_END);
-			printf("\rProgress: %d%% or %.3fGB of %.3fGB", precent,(double)_ftelli64(file)/(1024*1024*1024),file_size);
-			_fseeki64(file,last_size,SEEK_SET);
+			#elif __linux__
+			last_size=ftello(file);
+			#else
+			#error "Your OS is not compitable with this code. To make it compitable you must change some of it."
+			#endif
+			printf("\rProgress: %d%% or %.3fGB of %.3fGB", precent,(double)last_size/(1024*1024*1024),file_size);
 		}
 	}
 	putchar('\n');
