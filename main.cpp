@@ -90,7 +90,7 @@ int main(int argc, char**argv)
 		exp%=p(10,max-1-i);
 	}
 	
-	printf(" numbers in base %d to file %s.\nIt will take about %f GBs. Is that OK?\n", letters, argv[3], ((double)p(base, len)*(len + 2)) / (1024 * 1024 * 1024));
+	printf(" numbers in base %d to file %s.\nIt will take about %f GBs. Is that OK?\n", base, argv[3], ((double)p(base, len)*(len + 2)) / (1024 * 1024 * 1024));
 
 	if (getchar() != 'y')
 	{

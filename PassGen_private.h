@@ -12,7 +12,7 @@
 #define VER_BUILD	0
 #define COMPANY_NAME	"SKC"
 #define FILE_VERSION	"1.0.0.0"
-#define FILE_DESCRIPTION	"A simple password lists generator."
+#define FILE_DESCRIPTION	"A simple password files generator."
 #define INTERNAL_NAME	"PassGen"
 #define LEGAL_COPYRIGHT	""
 #define LEGAL_TRADEMARKS	""
